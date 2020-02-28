@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity4">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>        
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+   <link href="/css/style.css" rel="stylesheet" />
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:if="${items}">
+     
+        <div class="container">
+            <h2>Advisory List    </h2>
+            <table >
+                <thead>
+                <tr >
+                    <th>ITEM</th>
+                    
+                    <th>FDA SCANN RESULT</th>
+                    
+                    <TH> DETAIL</TH>
+                    
+                </tr>
+               
+                </thead>
+                              
+                <tbody th:if="${items}">
+                   
+                <tr  th:each = "itemslist: ${items}">
+                
+                <td th:style="${itemslist.produtFlag == true} ? ${'color: red;'}" th:text="${itemslist.producName}"></td>
+                <td th:style="${itemslist.produtFlag == true} ? ${'color: red;'}" th:text="${itemslist.fdaAdvisory}"></td>
+                                    
+                    
+                    <td> <a th:href="@{/item/detail/{id}(id=${itemslist.id})}"><button type="button" class="btn btn-primary">Detail</button></a>
+                    </td>
+                    </div>
+                </tr>
+              
+                </tbody>
+                
+            </table>
+           
+        </div>
+         
+       </div>
+<th:block th:replace="base :: jslinks"></th:block>
+</body>
+</html>

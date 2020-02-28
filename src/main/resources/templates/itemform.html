@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity4">
+<head>
+    <title>Profile</title>
+    <th:block th:replace="base :: headstuff"></th:block>
+</head>
+<body class="w3-theme-l5">
+
+<!-- Navbar -->
+<nav th:replace="base :: navbar"></nav>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1600px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+        <!-- Left Column -->
+        <div class="w3-col m2">
+            <!-- Profile -->
+            <div class="w3-card w3-round w3-white">
+                <div class="w3-container">
+                    <h4 class="w3-center">My Profile</h4>
+                    <p class="w3-center"><img th:src="${currentuser.profilePic}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                    <hr>
+                    <p th:inline="text"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> [[${currentuser.firstName}]] [[${currentuser.lastName}]]</p>
+                    <p th:inline="text"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> [[${currentuser.email}]]</p>
+                    <p th:inline="text"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Following:  <a th:href="@{/users/following}">[[${currentuser.noOfFriends}]]</a></p>
+
+                </div>
+            </div>
+
+            <br>
+            <!-- Interests -->
+            <div class="w3-col m11">
+                <h4 class="w3-center">Headline News</h4>
+                <div class="w3-container w3-card w3-white w3-round w3-margin"th:each="article:${articles}"><br>
+                    <span class="w3-right w3-opacity" th:text="${article.publishedAt}"></span>
+                    <h4 th:text="${article.title}"></h4><br/>
+                    <hr class="w3-clear">
+                    <span th:text="${article.description}"></span>
+                    <div><img class="w3-border w3-image" th:src="${article.image}"></div>
+                    <a th:href="${article.url}"></a>
+                    <div class="w3-row-padding" style="margin:0 -16px">
+                        <div class="w3-half">
+                            <!--<img src="/w3images/lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">-->
+                        </div>
+                        <div class="w3-half">
+                            <!--<img src="/w3images/nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">-->
+                        </div>
+                    </div>
+                </div>
+                <!-- End Middle Column -->
+            </div>
+            <br>
+
+            <!-- Interests -->
+            <!-- End Left Column -->
+        </div>
+
+        <!-- Middle Column -->
+        <div class="w3-col m7">
+
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <h6 class="w3-opacity"></h6>
+                            <form th:action="@{/users/saveitem}" th:object="${anItem}" method="post" enctype="multipart/form-data">
+                                <input type="hidden" th:field="*{id}">
+                                <div class="form-group col-md-6">
+                                    <label for="nameOfItem" th:text="'Name Of Item'"></label>
+                                    <input type="text" class="form-control" th:field="*{nameOfItem}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="description" th:text="'Descripiton'"></label>
+                                    <input type="text" class="form-control" th:field="*{description}">
+                                </div>
+                                <div>
+                                <label>Picture</label>
+                                <input type="file" name ="file" class="w3-input w3-border w3-padding"><br/>
+                                </div>
+                                    <div class="form-group col-md-6">
+                                    <label for="tags" th:text="'Tags'"></label>
+                                    <input type="text" class="form-control" th:field="*{tags}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="price" th:text="'Price'"></label>
+                                    <input type="text" class="form-control" th:field="*{price}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="numberInTheStock" th:text="'Number In TheStock'"></label>
+                                    <input type="text" class="form-control" th:field="*{numberInTheStock}">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+                <!-- End Middle Column -->
+
+            <!-- Right Column -->
+        </div>
+        <!--<div class="w3-col m3">-->
+            <!--<div class="w3-card w3-round w3-white">-->
+                <!--<div class="w3-container">-->
+                    <!--<p>Weather conditions for the next 7 days:</p>-->
+                    <!--<table class="menu">-->
+                        <!--<tr>-->
+                            <!--<th>Date</th>-->
+                            <!--<th>Maximum Temp</th>-->
+                            <!--<th>Minimum Temp</th>-->
+                            <!--&lt;!&ndash;<th>Total Precipitation</th>&ndash;&gt;-->
+                            <!--<th>Weather Condition</th>-->
+                            <!--&lt;!&ndash;<th>Graphic representation</th>&ndash;&gt;-->
+
+
+                        <!--</tr>-->
+                        <!--<tr th:each="weather:${weatherforcast}">-->
+                            <!--<td th:text="${weather.date}"></td>-->
+                            <!--<td th:text="${weather.day.maxtemp_f}"></td>-->
+                            <!--<td th:text="${weather.day.mintemp_f}"></td>-->
+                            <!--&lt;!&ndash;<td th:text="${weather.day.totalprecip_in}"></td>&ndash;&gt;-->
+                            <!--<td th:text="${weather.day.condition.text}"></td>-->
+                            <!--&lt;!&ndash;<td img th:src="${weather.day.condition.icon}" alt="Weather icon"></td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;img th:src="${forecast.stat.condition.icon}"&ndash;&gt;-->
+                        <!--</tr>-->
+
+                    <!--</table>-->
+                    <!--<p>-->
+                        <!--<span class="w3-tag w3-small w3-theme-d5">Weather</span>-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; End Right Column &ndash;&gt;-->
+        <!--</div>-->
+
+        <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
+</div>
+<br>
+
+<th:block th:replace="base :: jslinks"></th:block>
+</body>
+</html>

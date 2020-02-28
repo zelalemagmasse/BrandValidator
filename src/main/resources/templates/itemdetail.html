@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity4">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>        
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+   <link href="/css/style.css" rel="stylesheet" />
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:if="${itemDetail}">
+     
+        <div class="container">
+            <h2>Product Detail    </h2>
+            <table >
+                <thead>
+                <tr >
+                    <th>Product Name</th>
+                     <th>Made In </th>
+                      <th>City</th>                      
+                     <th>Product Description</th>
+                    
+                    <TH> FDA LINK</TH>
+                    
+                </tr>
+               
+                </thead>
+                              
+                <tbody th:if="${itemDetail}">
+                   
+                <tr >
+                
+                <td th:text="${itemDetail.producName}"></td>
+                <td th:text="${itemDetail.countryManufactured}"></td>
+                <td th:text="${itemDetail.cityManufactured}"></td>
+                <td th:text="${itemDetail.productDescription}"></td>
+                
+                                    
+                    
+                    <td> <a th:href="@{https://www.fda.gov/about-fda/open-government-fda-data-sets/recalls-data-sets}"><button type="button" class="btn btn-info">READ MORE...</button></a>
+                    </td>
+                    </div>
+                </tr>
+              
+                </tbody>
+                
+            </table>
+           
+        </div>
+         
+       </div>
+<th:block th:replace="base :: jslinks"></th:block>
+</body>
+</html>
